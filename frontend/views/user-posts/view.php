@@ -4,6 +4,7 @@ use common\rbac\Rbac;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
+
 /* @var $this yii\web\View */
 /* @var $user frontend\models\User */
 /* @var $model common\models\Post */
@@ -29,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </p>
     <?php endif; ?>
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1>111<?= Html::encode($this->title) ?></h1>
 
     <?= DetailView::widget([
         'model' => $model,
@@ -44,5 +45,11 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= Yii::$app->formatter->asHtml($model->content) ?>
         </div>
     </div>
+    
+             <?= $this->render('/partials/comment', [
+                 'post'=>$post,
+                 'comments'=>$comments,
+                 'commentForm'=>$commentForm,
+             ])?>
 
 </div>

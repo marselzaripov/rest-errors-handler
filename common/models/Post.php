@@ -83,4 +83,16 @@ class Post extends ActiveRecord implements Linkable
             'self' => Url::to(['post/view', 'id' => $this->id], true),
         ];
     }
+    
+    public function getComments()
+    {
+        return $this->hasMany(Comment::className(), ['post_id'=>'id']);
+    }
+
+    public function getPostComments()
+    {
+        return $this->getComments()->where(['status'=>1])->all();
+    }
+    
+    
 }

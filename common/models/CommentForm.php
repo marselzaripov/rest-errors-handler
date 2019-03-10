@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace common\models;
 
 use Yii;
 use yii\base\Model;
@@ -17,7 +17,7 @@ class CommentForm extends Model
         ];
     }
 
-    public function saveComment($article_id)
+    public function saveComment($post_id)
     {
         $comment = new Comment;
         $comment->text = $this->comment;

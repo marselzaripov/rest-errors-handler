@@ -6,6 +6,8 @@ use common\rbac\Rbac;
 use common\models\User;
 use Yii;
 use common\models\Post;
+use common\models\Comment;
+use common\models\CommentForm;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -53,9 +55,18 @@ class UserPostsController extends Controller
 
     public function actionView($user_id, $id)
     {
+	    $post = Post::findOne($id);
+        $comments = $post->getPostComments();
+        $commentForm = new CommentForm();
+
+        //$post->viewedCounter();
         return $this->render('view', [
             'user' => $this->findUserModel($user_id),
             'model' => $this->findPostModel($user_id, $id),
+            'post'=>$post,
+            'comments'=>$comments,
+            'commentForm'=>$commentForm
+            
         ]);
     }
 
@@ -141,4 +152,20 @@ class UserPostsController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+    
+    public function actionComment($id)
+    {
+        $model = new CommentForm();
+        
+        if(Yii::$app->request->isPost)
+        {
+            $model->load(Yii::$app->request->post());
+            if($model->saveComment($id))
+            {
+                Yii::$app->getSession()->setFlash('comment', 'Your comment will be added soon!');
+                return $this->redirect(['site/view','id'=>$id]);
+            }
+        }
+    }
+    
 }
