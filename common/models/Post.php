@@ -7,6 +7,7 @@ use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\helpers\Url;
 use yii\web\Linkable;
+use yii\data\Pagination;
 
 /**
  * This is the model class for table "{{%post}}".
@@ -83,7 +84,44 @@ class Post extends ActiveRecord implements Linkable
             'self' => Url::to(['post/view', 'id' => $this->id], true),
         ];
     }
-    
+
+
+
+    public static function getAll($pageSize = 5)
+    {
+        // build a DB query to get all articles
+        $query = Post::find();
+
+        // get the total number of articles (but do not fetch the article data yet)
+        $count = $query->count();
+
+        // create a pagination object with the total count
+        $pagination = new Pagination(['totalCount' => $count, 'pageSize'=>$pageSize]);
+
+        // limit the query using the pagination and retrieve the articles
+        $posts = $query->offset($pagination->offset)
+            ->limit($pagination->limit)
+            ->all();
+
+        $data['posts'] = $posts;
+        $data['pagination'] = $pagination;
+
+        return $data;
+    }
+/*
+    public static function getPopular()
+    {
+        return Post::find()->orderBy('viewed desc')->limit(3)->all();
+    }
+
+    public static function getRecent()
+    {
+        return Post::find()->orderBy('date asc')->limit(4)->all();
+    }
+*/
+
+
+
     public function getComments()
     {
         return $this->hasMany(Comment::className(), ['post_id'=>'id']);
