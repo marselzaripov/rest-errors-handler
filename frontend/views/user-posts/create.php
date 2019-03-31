@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $user frontend\models\User */
+/* @var $user common\models\User */
 /* @var $model common\models\Post */
 
 $this->title = 'Create Post';

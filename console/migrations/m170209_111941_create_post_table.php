@@ -18,6 +18,10 @@ class m170209_111941_create_post_table extends Migration
             'updated_at' => $this->integer()->notNull(),
             'title' => $this->string(),
             'content' => $this->text(),
+            'date'=>$this->date(),
+            'image'=>$this->string(),
+            'viewed'=>$this->integer(),
+            'category_id'=>$this->integer(),
         ], $tableOptions);
 
         $this->createIndex('idx-post-user_id', '{{%post}}', 'user_id');
