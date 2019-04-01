@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use Yii;
 
 use common\models\Post;
+use common\models\Category;
 use frontend\models\ImageUpload;
 use frontend\models\PostSearch;
 use yii\web\Controller;
@@ -15,24 +16,29 @@ use yii\web\NotFoundHttpException;
 
 class PostsController extends Controller
 {
-    /*public function actionIndex()
+    public function actionIndex()
     {
         $searchModel = new PostSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $popular = PostSearch::getPopular();
+        $recent = PostSearch::getRecent();
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'popular'=>$popular,
+            'recent'=>$recent,
+            'categories'=>$categories,
         ]);
 
 
-    }*/
-    public function actionIndex()
+    }
+    /*public function actionIndex()
     {
         $data = PostSearch::getAll(5);
          $popular = PostSearch::getPopular();
           $recent = PostSearch::getRecent();
-        /* $categories = Categoty::getAll();*/
+
 
         return $this->render('index',[
             'posts'=>$data['posts'],
@@ -41,7 +47,7 @@ class PostsController extends Controller
             'recent'=>$recent,
             'categories'=>$categories
         ]);
-    }
+    }*/
 
     protected function findModel($id)
     {
