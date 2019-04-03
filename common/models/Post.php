@@ -139,7 +139,7 @@ class Post extends ActiveRecord implements Linkable
 
     public function getImage()
     {
-        return ($this->image) ? '/uploads/' . $this->image : '/no-image.png';
+        return ($this->image) ? '/uploads/' . $this->image : '';
     }
 
     public function deleteImage()

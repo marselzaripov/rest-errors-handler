@@ -40,7 +40,7 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                '' => 'site/index',
+                '' => 'posts/index',
 
                 'users/<user_id:\d+>/posts' => 'user-posts/index',
                 'users/<user_id:\d+>/posts/<id:\d+>' => 'user-posts/view',

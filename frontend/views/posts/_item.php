@@ -20,6 +20,7 @@ use yii\helpers\Url;
 -->
 
 <article class="post">
+    <?if($model->getImage()!==""):?>
     <div class="post-thumb">
         <a href="<?= Url::toRoute(['user-posts/view', 'user_id' => $model->user_id, 'id' => $model->id]);?>"><img src="<?= $model->getImage();?>" alt=""></a>
 
@@ -27,6 +28,7 @@ use yii\helpers\Url;
             <div class="text-uppercase text-center">View Post</div>
         </a>
     </div>
+    <?endif;?>
     <div class="post-content">
         <header class="entry-header text-center text-uppercase">
             <h6><a href="<?= Url::toRoute(['site/category','id'=>$model->category->id])?>"> <?= $model->category->title; ?></a></h6>

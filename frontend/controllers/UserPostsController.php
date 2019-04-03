@@ -6,6 +6,7 @@ use common\rbac\Rbac;
 use common\models\User;
 use Yii;
 use common\models\Post;
+use frontend\models\PostSearch;
 use common\models\Comment;
 use common\models\CommentForm;
 use yii\data\ActiveDataProvider;
@@ -50,12 +51,15 @@ class UserPostsController extends Controller
         return $this->render('index', [
             'user' => $user,
             'dataProvider' => $dataProvider,
+
         ]);
     }
 
     public function actionView($user_id, $id)
     {
 	    $post = Post::findOne($id);
+        $popular = PostSearch::getPopular();
+        $recent = PostSearch::getRecent();
         $comments = $post->getPostComments();
         $commentForm = new CommentForm();
 
@@ -65,7 +69,10 @@ class UserPostsController extends Controller
             'model' => $this->findPostModel($user_id, $id),
             'post'=>$post,
             'comments'=>$comments,
-            'commentForm'=>$commentForm
+            'commentForm'=>$commentForm,
+            'popular'=>$popular,
+            'recent'=>$recent,
+            'categories'=>$categories,
             
         ]);
     }

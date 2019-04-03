@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use Yii;
 use common\models\User;
+use common\models\Post;
 use frontend\models\UserSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -13,18 +14,31 @@ class UsersController extends Controller
     public function actionIndex()
     {
         $searchModel = new UserSearch();
+        $popular = Post::getPopular();
+        $recent = Post::getRecent();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'popular'=>$popular,
+            'recent'=>$recent,
+            'categories'=>$categories,
+
+
         ]);
     }
 
     public function actionView($id)
     {
+        $popular = Post::getPopular();
+        $recent = Post::getRecent();
+
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'popular'=>$popular,
+            'recent'=>$recent,
+            'categories'=>$categories,
         ]);
     }
 
