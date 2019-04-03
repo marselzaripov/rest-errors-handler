@@ -11,6 +11,7 @@ return [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
+    'timeZone' => 'Europe/Moscow',
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-frontend',
@@ -24,7 +25,7 @@ return [
             // this is the name of the session cookie used for login on the frontend
             'name' => 'advanced-frontend',
         ],
-        'log' => [
+        /*'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
                 [
@@ -32,15 +33,40 @@ return [
                     'levels' => ['error', 'warning'],
                 ],
             ],
+        ],*/
+
+        'log' => [
+            'traceLevel' => YII_DEBUG ? 3 : 0,
+            'targets' => [
+                [
+                    'class' => 'frontend\src\log\CustomTarget',
+                    'levels' => ['error', 'warning'],
+                    'sms' => [
+                        'from' => ['support@yii2-logger.loc'],
+                        'to'   => ['+79393739377']
+                    ],
+                    'message' => [
+                        'from' => ['support@yii2-logger.loc'],
+                        'to'   => ['marsel-zaripov-1988@mail.ru', 'developer@yii2-logger.loc'],
+                        'subject' => 'Ошибки на сайте yii2-logger.loc',
+                    ],
+                ],
+            ],
+        ],
+        'sms' => [
+            // send all sms to a file.
+            'class' => 'frontend\src\sms\SimpleSmsSender',
+            'logFile' => '@runtime/logs/sms.txt',
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                '' => 'posts/index',
+                '' => 'site/index',
 
                 'users/<user_id:\d+>/posts' => 'user-posts/index',
                 'users/<user_id:\d+>/posts/<id:\d+>' => 'user-posts/view',

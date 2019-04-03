@@ -11,10 +11,6 @@ $this->title = $model->username;
 $this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="main-content">
-<div class="container">
-<div class="row">
-<div class="col-md-8">
 <div class="user-view">
 
     <?php if (Yii::$app->user->can(Rbac::MANAGE_PROFILE, ['user' => $model])): ?>
@@ -41,14 +37,4 @@ $this->params['breadcrumbs'][] = $this->title;
             'user' => $model,
     ]) ?>
 
-</div>
-</div>
-      <?= $this->render('/partials/sidebar', [
-                    'popular'=>$popular,
-                    'recent'=>$recent,
-                    'categories'=>$categories
-                ]);?>
-                </div>
-                
-</div>
 </div>

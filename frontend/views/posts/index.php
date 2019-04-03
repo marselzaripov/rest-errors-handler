@@ -21,6 +21,12 @@ $this->params['breadcrumbs'][] = $this->title;
                         'dataProvider' => $dataProvider,
                         'itemOptions' => ['class' => 'item'],
                         'itemView' => '_item',
+                        'pager' => [ 
+                            'maxButtonCount' => 3,
+                            'firstPageLabel' => 'first',
+                            'lastPageLabel' => 'last',
+                            'prevPageLabel' => 'previous',
+                            'nextPageLabel' => 'next',],
                     ]) ?>
                 </div>
                 <?= $this->render('/partials/sidebar', [

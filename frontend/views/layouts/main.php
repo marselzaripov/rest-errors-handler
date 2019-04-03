@@ -21,42 +21,35 @@ AppAsset::register($this);
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 </head>
-<style type="text/css">
-    .logout{
-        padding-top: 15px;
-        font-size: 13px;
 
-    }
-</style>
 <body>
 <?php $this->beginBody() ?>
 
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'Authorshub',
-        'brandUrl' => '/posts',
+        'brandLabel' => 'My Company',
+        'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
     $menuItems = [
-        /*['label' => 'Главная', 'url' => ['/site/index']],*/
-        ['label' => 'Публикации', 'url' => ['/posts/index']],
-        ['label' => 'Авторы', 'url' => ['/users/index']],
+        ['label' => 'Home', 'url' => ['/site/index']],
+        ['label' => 'Posts', 'url' => ['/posts/index']],
+        ['label' => 'Users', 'url' => ['/users/index']],
     ];
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Регистрация', 'url' => ['/site/signup']];
-        $menuItems[] = ['label' => 'Вход', 'url' => ['/site/login']];
+        $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
+        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
         $menuItems[] = ['label' => Yii::$app->user->identity->username, 'url' => ['/users/view', 'id' => Yii::$app->user->id]];
-        $menuItems[] = ['label' => 'Профиль', 'url' => ['/profile/index']];
+        $menuItems[] = ['label' => 'Profile', 'url' => ['/profile/index']];
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(
-                'Выход',
+                'Logout',
                 ['class' => 'btn btn-link logout']
             )
             . Html::endForm()
@@ -80,9 +73,9 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; ALTER LLC <?= date('Y') ?></p>
+        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
 
-        <!--<p class="pull-right"><?= Yii::powered() ?></p>-->
+        <p class="pull-right"><?= Yii::powered() ?></p>
     </div>
 </footer>
 

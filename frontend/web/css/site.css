@@ -103,7 +103,7 @@ header
 }
 
 .nav > li > a:first-child {
-    /*padding-left: 0;*/
+   /* padding-left: 0;*/
 }
 
 .main-menu.navbar-default .navbar-collapse, .navbar-default {

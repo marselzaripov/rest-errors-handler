@@ -18,6 +18,10 @@ class PostsController extends Controller
 {
     public function actionIndex()
     {
+
+        Yii::warning('Test warning from ' . __METHOD__);
+        Yii::error('Test error from ' . __METHOD__);
+
         $searchModel = new PostSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $popular = PostSearch::getPopular();

@@ -15,10 +15,6 @@ $this->params['breadcrumbs'][] = ['label' => $user->username, 'url' => ['users/v
 $this->params['breadcrumbs'][] = ['label' => 'Posts', 'url' => ['index', 'user_id' => $user->id]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="main-content">
-<div class="container">
-<div class="row">
-<div class="col-md-8">
 <div class="post-view">
 
     <?php if (Yii::$app->user->can(Rbac::MANAGE_POST, ['post' => $model])): ?>
@@ -36,36 +32,24 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <img src="<?= $model->getImage();?>" alt="">
-
-    <?/*= DetailView::widget([
+    <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
             'created_at:datetime',
             'updated_at:datetime',
         ],
-    ]) */?>
+    ]) ?>
 
-    <div class="panel">
+    <div class="panel panel-default">
         <div class="panel-body">
             <?= Yii::$app->formatter->asHtml($model->content) ?>
         </div>
     </div>
-
+    
              <?= $this->render('/partials/comment', [
                  'post'=>$post,
                  'comments'=>$comments,
                  'commentForm'=>$commentForm,
              ])?>
 
-</div>
-</div>
-      <?= $this->render('/partials/sidebar', [
-                    'popular'=>$popular,
-                    'recent'=>$recent,
-                    'categories'=>$categories
-                ]);?>
-                </div>
-                
-</div>
 </div>
